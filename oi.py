@@ -1,4 +1,6 @@
-class OI:
+from wpilib.joystick import Joystick
+
+class OI(object):
 
     def __init__(self):
-        pass
+        self.stick = Joystick(0)
