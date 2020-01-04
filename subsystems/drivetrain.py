@@ -2,6 +2,7 @@ from wpilib.command.subsystem import Subsystem
 from robotmap import RobotMap
 from wpilib.drive.differentialdrive import DifferentialDrive
 
+from commands.joystick_drive import JoystickDrive
 from ctre.wpi_talonsrx import WPI_TalonSRX
 import wpilib
 
@@ -26,3 +27,5 @@ class DriveTrain(Subsystem):
     def diffdrive(self, x, y):
         self.drive.arcadeDrive(x, y)
 
+    def initDefaultCommand(self) -> None:
+        self.setDefaultCommand(JoystickDrive())
