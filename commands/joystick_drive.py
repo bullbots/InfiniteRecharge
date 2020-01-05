@@ -11,5 +11,9 @@ class JoystickDrive(Command):
         joyY = Command.getRobot().oi.stick.getY()
         Command.getRobot().drivetrain.diffdrive(joyX, -joyY)
 
+        print(joyX)
+        print(joyY)
+
     def isFinished(self):
         return False
+
