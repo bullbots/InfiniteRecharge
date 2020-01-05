@@ -10,36 +10,42 @@ class InfiniteRechargeRobot(CommandBasedRobot):
 
     def robotInit(self):
         """This code runs when we start the robot, initialize subsystems here."""
+        super().robotInit()
+
+        # Set up method to access robot anywhere
         Command.getRobot = lambda: self
+
+        # Initialize Subsystems
         self.drivetrain = DriveTrain()
         self.oi = OI()
 
     def robotPeriodic(self):
         """This code runs every 20ms regardless of robot state, usefull for logging code."""
-        pass
+        super().robotPeriodic()
 
     def disabledInit(self):
         """This code runs when we disable the robot."""
-        pass
+        super().disabledInit()
 
     def disabledPeriodic(self):
         """This code runs every 20ms when the robot is disabled."""
-        pass
+        super().disabledPeriodic()
 
     def autonomousInit(self):
         """This code runs when we start autonomous mode"""
-        pass
+        super().autonomousInit()
 
     def autonomousPeriodic(self):
         """This code runs every 20ms when the robot is in autonomous mode"""
+        super().autonomousPeriodic()
 
     def teleopInit(self):
         """This code runs when we start teleop mode"""
-        pass
+        super().teleopInit()
 
     def teleopPeriodic(self):
         """This code runs every 20ms when the robot is in teleop mode"""
-        pass
+        super().teleopPeriodic()
 
 
 if __name__ == "__main__":

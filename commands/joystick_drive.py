@@ -9,8 +9,7 @@ class JoystickDrive(Command):
     def execute(self):
         joyX = Command.getRobot().oi.stick.getX()
         joyY = Command.getRobot().oi.stick.getY()
-        print(joyX)
-        print(joyY)
+
         Command.getRobot().drivetrain.diffdrive(joyX, -joyY)
 
     def isFinished(self):
