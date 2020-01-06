@@ -24,5 +24,9 @@ class PhysicsEngine:
         left_master_motor = -hal_data["CAN"][1]["value"]
         right_master_motor = hal_data["CAN"][3]["value"]
 
-        x, y, angle = self.drivetrain.get_distance(left_master_motor, right_master_motor, tm_diff)
+        x, y, angle = self.drivetrain.get_distance(
+            left_master_motor,
+            right_master_motor,
+            tm_diff
+        )
         self.physics_controller.distance_drive(x, y, angle)
