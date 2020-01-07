@@ -1,6 +1,5 @@
 from wpilib.command import Command
 
-
 class JoystickDrive(Command):
 
     def __init__(self):
@@ -10,9 +9,6 @@ class JoystickDrive(Command):
         joyX = Command.getRobot().oi.stick.getX()
         joyY = Command.getRobot().oi.stick.getY()
         Command.getRobot().drivetrain.diffdrive(joyX, -joyY)
-
-        print(joyX)
-        print(joyY)
 
     def isFinished(self):
         return False

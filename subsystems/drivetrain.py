@@ -6,7 +6,6 @@ from commands.joystick_drive import JoystickDrive
 from ctre.wpi_talonsrx import WPI_TalonSRX
 import wpilib
 
-
 class DriveTrain(Subsystem):
     def __init__(self):
         super().__init__()
@@ -25,10 +24,6 @@ class DriveTrain(Subsystem):
         self.drive = DifferentialDrive(self.leftMasterTalon, self.rightMasterTalon)
 
     def diffdrive(self, x, y):
-        # if (-.3) < x < .3:
-        #     x = 0
-        # if (-.3) < y < .1:
-        #     y = 0
 
         x = self.deadband(x)
         y = self.deadband(y)
@@ -40,8 +35,6 @@ class DriveTrain(Subsystem):
         if deadband_value < num < deadband_value:
             num = 0
         return num
-
-
 
     def initDefaultCommand(self) -> None:
         self.setDefaultCommand(JoystickDrive())
