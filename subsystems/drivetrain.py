@@ -45,7 +45,10 @@ class DriveTrain(Subsystem):
             x (float): X component of joystick input
             y (float): Y component of joystick input
         """
-        self.drive.arcadeDrive(x, y)
+        x_squared = x*abs(x)
+        y_squared = y*abs(y)
+        self.drive.arcadeDrive(x_squared, y_squared)
+
 
     def initDefaultCommand(self) -> None:
         self.setDefaultCommand(JoystickDrive())
