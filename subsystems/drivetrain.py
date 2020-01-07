@@ -4,6 +4,7 @@ from wpilib.drive.differentialdrive import DifferentialDrive
 
 from commands.joystick_drive import JoystickDrive
 from ctre.wpi_talonsrx import WPI_TalonSRX
+import wpilib
 from constants import Constants
 
 class DriveTrain(Subsystem):
@@ -45,10 +46,18 @@ class DriveTrain(Subsystem):
             x (float): X component of joystick input
             y (float): Y component of joystick input
         """
+        x = self.deadband(x)
+        y = self.deadband(y)
+        
         x_squared = x*abs(x)
         y_squared = y*abs(y)
         self.drive.arcadeDrive(x_squared, y_squared)
 
+    def deadband(self, num):
+        deadband_value = .1
+        if deadband_value < num < deadband_value:
+            num = 0
+        return num
 
     def initDefaultCommand(self) -> None:
         self.setDefaultCommand(JoystickDrive())
