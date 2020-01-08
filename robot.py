@@ -9,7 +9,7 @@ from oi import OI
 class InfiniteRechargeRobot(CommandBasedRobot):
 
     def robotInit(self):
-        """This code runs when we start the robot, initialize subsystems here."""
+        """This code runs at robot start, initialize subsystems here."""
         super().robotInit()
 
         # Set up method to access robot anywhere
@@ -20,7 +20,7 @@ class InfiniteRechargeRobot(CommandBasedRobot):
         self.oi = OI()
 
     def robotPeriodic(self):
-        """This code runs every 20ms regardless of robot state, usefull for logging code."""
+        """This code runs every 20ms regardless of robot state"""
         super().robotPeriodic()
 
     def disabledInit(self):

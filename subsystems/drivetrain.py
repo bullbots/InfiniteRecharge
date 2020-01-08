@@ -4,9 +4,9 @@ from wpilib.drive.differentialdrive import DifferentialDrive
 
 from commands.joystick_drive import JoystickDrive
 from ctre.wpi_talonsrx import WPI_TalonSRX
-import wpilib
 from constants import Constants
 from drive_interpreter import DriveHelper
+
 
 class DriveTrain(Subsystem):
     def __init__(self):
@@ -42,7 +42,7 @@ class DriveTrain(Subsystem):
         self._right_master_talon.config_kF(0, Constants.DRIVETRAIN_F)
         self._right_master_talon.config_kP(0, Constants.DRIVETRAIN_P)
         self._right_master_talon.config_kI(0, Constants.DRIVETRAIN_I)
-        self._right_master_talon.config_kD(0, Constants.DRIVETRAIN_D) 
+        self._right_master_talon.config_kD(0, Constants.DRIVETRAIN_D)
 
     def diffdrive(self, x: float, y: float):
         """Maps Joystick input to motor output
@@ -52,19 +52,19 @@ class DriveTrain(Subsystem):
         """
         x = self.deadband(x)
         y = self.deadband(y)
-        
+
         x_squared = x*abs(x)
         y_squared = y*abs(y)
         self.drive.arcadeDrive(x_squared, y_squared)
 
-    #This is experimental code
+    # This is experimental code
     def interpreted_drive(self, x: float, y: float):
         left_pwm, right_pwm = self.driveInterpreter.DriveSignal(y, x, False, False)
         self._left_master_talon.set(left_pwm)
         self._right_master_talon.set(right_pwm)
-        print("x =", x, "   y =", y, "    left_pwm =", left_pwm, "right_pwm =", right_pwm)
-        
+
     def deadband(self, num):
+        """Limit the allowed values from the joystick to be larger than .1"""
         deadband_value = .1
         if deadband_value < num < deadband_value:
             num = 0
@@ -72,10 +72,10 @@ class DriveTrain(Subsystem):
 
     def initDefaultCommand(self) -> None:
         self.setDefaultCommand(JoystickDrive())
-    
+
     def set(self, control_mode: WPI_TalonSRX.ControlMode, left_magnitude: float, right_magnitude: float):
         """Sets Drivetrain control mode and magnitudes for left and right side
-        
+
         Args:
             control_mode (WPI_TalonSRX.ControlMode): Control Mode for both motor controllers
             left_magnitude (float): Magnitude for the left side
@@ -85,5 +85,6 @@ class DriveTrain(Subsystem):
         self._right_master_talon.set(control_mode, left_magnitude, right_magnitude)
 
     def stop(self):
+        """Sets all motor outputs to zero, run when robot is disabled"""
         self._left_master_talon.set(0)
         self._right_master_talon.set(0)
