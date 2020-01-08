@@ -72,3 +72,8 @@ class DriveTrain(Subsystem):
         """
         self._left_master_talon.set(control_mode, left_magnitude, right_magnitude)
         self._right_master_talon.set(control_mode, left_magnitude, right_magnitude)
+
+    def getPosition(self):
+        left  = self._left_master_talon.getSelectedSensorPosition(0)
+        right = self._right_master_talon.getSelectedSensorPosition(0)
+        return left, right
