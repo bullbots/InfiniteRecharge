@@ -1,5 +1,3 @@
-import ctre
-import wpilib
 import math
 
 

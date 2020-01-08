@@ -11,8 +11,10 @@ class Shooter(Subsystem):
 
         self.shooter_talon = WPI_TalonSRX(RobotMap.SHOOTER_TALON)
 
-        self.shooter_talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0,
-                                                        Constants.TIMEOUT_MS)
+        self.shooter_talon.configSelectedFeedbackSensor(
+            FeedbackDevice.CTRE_MagEncoder_Relative, 0, Constants.TIMEOUT_MS
+        )
+        
         self.configure_pid()
 
     def configure_pid(self):
