@@ -83,3 +83,7 @@ class DriveTrain(Subsystem):
         """
         self._left_master_talon.set(control_mode, left_magnitude, right_magnitude)
         self._right_master_talon.set(control_mode, left_magnitude, right_magnitude)
+
+    def stop(self):
+        self._left_master_talon.set(0)
+        self._right_master_talon.set(0)
