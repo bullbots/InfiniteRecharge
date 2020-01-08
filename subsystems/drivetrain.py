@@ -5,6 +5,7 @@ from wpilib.drive.differentialdrive import DifferentialDrive
 from commands.joystick_drive import JoystickDrive
 from ctre.wpi_talonsrx import WPI_TalonSRX
 from constants import Constants
+from drive_interpreter import DriveHelper
 
 class DriveTrain(Subsystem):
     def __init__(self):
@@ -27,6 +28,9 @@ class DriveTrain(Subsystem):
         # DifferentialDrive which conversts our joystick input to motor output, see diffdrive method
         self.drive = DifferentialDrive(self._left_master_talon, self._right_master_talon)
 
+        # Drive Interpreter to convert joystick input to motor signal
+        self.driveInterpreter = DriveHelper()
+
     def configure_pid(self):
         """Set all relevant PID Constants for the Drivetrain subsystem"""
         self._left_master_talon.config_kF(0, Constants.DRIVETRAIN_F)
@@ -45,7 +49,17 @@ class DriveTrain(Subsystem):
             x (float): X component of joystick input
             y (float): Y component of joystick input
         """
-        self.drive.arcadeDrive(x, y)
+        x_squared = x*abs(x)
+        y_squared = y*abs(y)
+        self.drive.arcadeDrive(x_squared, y_squared)
+
+
+    #This is experimental code
+    def interpreted_drive(self, x: float, y: float):
+        left_pwm, right_pwm = self.driveInterpreter.DriveSignal(y, x, False, False)
+        self._left_master_talon.set(left_pwm)
+        self._right_master_talon.set(right_pwm)
+        print("x =", x, "   y =", y, "    left_pwm =", left_pwm, "right_pwm =", right_pwm)
 
     def initDefaultCommand(self) -> None:
         self.setDefaultCommand(JoystickDrive())
