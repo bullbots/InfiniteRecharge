@@ -1,6 +1,5 @@
 from wpilib.command import Command
 
-
 class JoystickDrive(Command):
 
     def __init__(self):
@@ -14,3 +13,4 @@ class JoystickDrive(Command):
 
     def isFinished(self):
         return False
+
