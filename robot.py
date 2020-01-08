@@ -26,6 +26,7 @@ class InfiniteRechargeRobot(CommandBasedRobot):
     def disabledInit(self):
         """This code runs when we disable the robot."""
         super().disabledInit()
+        self.drivetrain.stop()
 
     def disabledPeriodic(self):
         """This code runs every 20ms when the robot is disabled."""
