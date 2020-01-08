@@ -15,3 +15,6 @@ class MoveForward(Command):
         left_error = abs(self.distance - left)
         right_error = abs(self.distance - right)
         return left_error < 400 and right_error < 400
+
+    def end(self):
+        Command.getRobot().drivetrain.set(ControlMode.PercentOutput, 0, 0)
