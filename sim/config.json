@@ -8,6 +8,13 @@
       "starting_x": 2,
       "starting_y": 20,
       "starting_angle": 0
-  	}
+    },
+    
+    "field": {
+      "w": 52,
+      "h": 27,
+      "px_per_ft": 17,
+      "image": "./Field2020.png"
+    }
   }
 }

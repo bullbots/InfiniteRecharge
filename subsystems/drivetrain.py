@@ -53,9 +53,7 @@ class DriveTrain(Subsystem):
         x = self.deadband(x)
         y = self.deadband(y)
 
-        x_squared = x*abs(x)
-        y_squared = y*abs(y)
-        self.drive.arcadeDrive(x_squared, y_squared)
+        self.drive.arcadeDrive(x, y, squareInputs=True)
 
     # This is experimental code
     def interpreted_drive(self, x: float, y: float):
@@ -66,7 +64,7 @@ class DriveTrain(Subsystem):
     def deadband(self, num):
         """Limit the allowed values from the joystick to be larger than .1"""
         deadband_value = .1
-        if deadband_value < num < deadband_value:
+        if -deadband_value < num < deadband_value:
             num = 0
         return num
 
