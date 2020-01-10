@@ -48,10 +48,13 @@ This is where we define all the commands that we can run during a match. This do
 This runs once when the command is started. All PID operations should be done here, otherwise they should start in execute. This is useful for command specific configuration
 
 #### `execute(self)`
-This is the command that does the doing, running every 20ms until the command finishes
+This is the method that does the doing, running every 20ms until the command finishes
 
 #### `isFinished(self)`
 This should return a boolean that tells the command whether it has finished. If your command is moving a motor to a position, then this should test whether you are at that position. If you want your command to never end, return false
+
+#### `end(self)`
+This method runs once the command has finished, generally set motor to zero here
 
 ### oi.py
 This is where we configure all input for our robot. For instance, we create all buttons and joysticks here. We also map commands to inputs here, so if you want a button to start a command, do it here.
