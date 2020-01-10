@@ -79,8 +79,8 @@ class DriveTrain(Subsystem):
             left_magnitude (float): Magnitude for the left side
             right_magnitude (float): Magnitude for the right side
         """
-        self._left_master_talon.set(control_mode, left_magnitude, right_magnitude)
-        self._right_master_talon.set(control_mode, left_magnitude, right_magnitude)
+        self._left_master_talon.set(control_mode, left_magnitude)
+        self._right_master_talon.set(control_mode, right_magnitude)
 
     def stop(self):
         """Sets all motor outputs to zero, run when robot is disabled"""
