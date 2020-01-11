@@ -26,6 +26,9 @@ class DriveTrain(Subsystem):
         self._left_master_talon.setInverted(True)
         self._left_slave_talon.setInverted(True)
 
+        self._left_master_talon.configClosedLoopRamp(Constants.DRIVETRAIN_RAMP)
+        self._right_master_talon.configClosedLoopRamp(Constants.DRIVETRAIN_RAMP)
+
         # DifferentialDrive which conversts our joystick input to motor output, see diffdrive method
         self.drive = DifferentialDrive(self._left_master_talon, self._right_master_talon)
 
