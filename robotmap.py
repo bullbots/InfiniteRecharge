@@ -4,5 +4,6 @@ class RobotMap:
     LEFT_SLAVE_TALON = 2
     RIGHT_MASTER_TALON = 3
     RIGHT_SLAVE_TALON = 4
+    CLIMB_TALON = 7
 
     SHOOTER_TALON = 5
