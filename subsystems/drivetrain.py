@@ -6,7 +6,7 @@ from commands.joystick_drive import JoystickDrive
 from ctre.wpi_talonsrx import WPI_TalonSRX
 from constants import Constants
 from drive_interpreter import DriveHelper
-
+import math
 
 class DriveTrain(Subsystem):
     def __init__(self):
@@ -53,7 +53,10 @@ class DriveTrain(Subsystem):
         x = self.deadband(x)
         y = self.deadband(y)
 
-        self.drive.arcadeDrive(x, y, squareInputs=True)
+        x = math.copysign(1.23 * (abs(x) - .1) ** 2, x)
+        y = math.copysign(1.23 * (abs(y) - .1) ** 2, y)
+        self.drive.arcadeDrive(x, y, squareInputs=False)
+
 
     # This is experimental code
     def interpreted_drive(self, x: float, y: float):
