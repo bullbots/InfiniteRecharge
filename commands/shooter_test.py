@@ -8,6 +8,8 @@ class ShooterTest(Command):
     def __init__(self):
         super().__init__(subsystem=Command.getRobot().shooter, name="Shooter")
 
+        SmartDashboard.putBoolean("Shooter On/Off", False)
+
     def initialize(self):
         Command.getRobot().shooter.set(ControlMode.PercentOutput, .5)
 
