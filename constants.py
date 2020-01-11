@@ -13,4 +13,4 @@ class Constants:
     DRIVETRAIN_I = 0
     DRIVETRAIN_D = 0
 
-    DRIVETRAIN_RAMP = 0.5
+    DRIVETRAIN_RAMP = 100
