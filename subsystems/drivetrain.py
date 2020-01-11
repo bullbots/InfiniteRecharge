@@ -6,6 +6,7 @@ from commands.joystick_drive import JoystickDrive
 from ctre.wpi_talonsrx import WPI_TalonSRX
 from constants import Constants
 from drive_interpreter import DriveHelper
+from wpilib.smartdashboard import SmartDashboard
 
 
 class DriveTrain(Subsystem):
@@ -54,6 +55,9 @@ class DriveTrain(Subsystem):
         y = self.deadband(y)
 
         self.drive.arcadeDrive(x, y, squareInputs=True)
+
+        SmartDashboard.putNumber("left master voltage", self._left_master_talon.getMotorOutputVoltage())
+        SmartDashboard.putNumber("right master voltage", self._right_master_talon.getMotorOutputVoltage())
 
     # This is experimental code
     def interpreted_drive(self, x: float, y: float):

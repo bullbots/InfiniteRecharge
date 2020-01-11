@@ -1,4 +1,5 @@
 from wpilib.command import Command
+from wpilib.smartdashboard import SmartDashboard
 
 
 class JoystickDrive(Command):
@@ -10,6 +11,9 @@ class JoystickDrive(Command):
     def execute(self):
         joyX = Command.getRobot().oi.stick.getX()
         joyY = Command.getRobot().oi.stick.getY()
+
+        SmartDashboard.putNumber("Joystick X", joyX)
+        SmartDashboard.putNumber("Joystick y", joyY)
 
         Command.getRobot().drivetrain.diffdrive(joyX, -joyY)
 
