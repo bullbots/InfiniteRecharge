@@ -3,6 +3,7 @@ from wpilib.command import Command
 from commandbased import CommandBasedRobot
 
 from subsystems.drivetrain import DriveTrain
+from subsystems.shooter import Shooter
 from oi import OI
 
 
@@ -17,6 +18,7 @@ class InfiniteRechargeRobot(CommandBasedRobot):
 
         # Initialize Subsystems
         self.drivetrain = DriveTrain()
+        self.shooter = Shooter()
         self.oi = OI()
 
     def robotPeriodic(self):
