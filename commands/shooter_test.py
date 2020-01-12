@@ -2,8 +2,9 @@ from wpilib.command import Command
 from ctre._impl import ControlMode
 
 from wpilib.smartdashboard import SmartDashboard
+from commands.logging_decorator import logging_command
 
-
+@logging_command
 class ShooterTest(Command):
     def __init__(self):
         super().__init__(subsystem=Command.getRobot().shooter, name="Shooter")

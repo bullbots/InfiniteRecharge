@@ -1,7 +1,8 @@
 from wpilib.command import Command
 from wpilib.smartdashboard import SmartDashboard
+from commands.logging_decorator import logging_command
 
-
+@logging_command
 class JoystickDrive(Command):
     """Get input from joysticks and feed it into diffdrive method of the drivetrain"""
 
