@@ -5,6 +5,7 @@ from commandbased import CommandBasedRobot
 from subsystems.drivetrain import DriveTrain
 from subsystems.shooter import Shooter
 from oi import OI
+from commands.autonomus_driving import AutonomusDriving
 
 
 class InfiniteRechargeRobot(CommandBasedRobot):
@@ -20,6 +21,7 @@ class InfiniteRechargeRobot(CommandBasedRobot):
         self.drivetrain = DriveTrain()
         self.shooter = Shooter()
         self.oi = OI()
+        self.autonomousCommand = AutonomusDriving()
 
     def robotPeriodic(self):
         """This code runs every 20ms regardless of robot state"""
@@ -38,6 +40,7 @@ class InfiniteRechargeRobot(CommandBasedRobot):
     def autonomousInit(self):
         """This code runs when we start autonomous mode"""
         super().autonomousInit()
+        self.autonomousCommand.start()
 
     def autonomousPeriodic(self):
         """This code runs every 20ms when the robot is in autonomous mode"""
