@@ -1,8 +1,9 @@
 from wpilib.command import TimedCommand
 from wpilib.command import Command
 from ctre._impl import ControlMode
+from commands.logging_decorator import logging_command
 
-
+@logging_command
 class MoveTimed(TimedCommand):
     def __init__(self, duration):
         super().__init__(subsystem=Command.getRobot().drivetrain, timeoutInSeconds=duration, name="MoveTimed")
