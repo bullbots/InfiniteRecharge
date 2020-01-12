@@ -9,3 +9,7 @@ class Climb(Subsystem):
         super().__init__()
 
         self._climb_talon = WPI_TalonSRX(RobotMap.CLIMB_TALON)
+
+    def set(self, control_mode: WPI_TalonSRX.ControlMode, magnitude):
+
+        self._climb_talon.set(control_mode, magnitude)
