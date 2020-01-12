@@ -18,8 +18,14 @@ class Shooter(Subsystem):
         self.top_shooter_talon.configSelectedFeedbackSensor(
             FeedbackDevice.CTRE_MagEncoder_Relative, 0, Constants.TIMEOUT_MS
         )
-        
+
+        self.top_shooter_talon.getSelectedSensorVelocity(0)
+        self.bottom_shooter_talon.getSelectedSensorVelocity(0)
         self.configure_pid()
+
+        # Setting up variables to be accessed by shooter_test - Is there a better way to do this? It seems messy
+        self.top_shooter_velocity = self.top_shooter_talon.getSelectedSensorVelocity(0)
+        self.bottom_shooter_velocity = self.bottom_shooter_talon.getSelectedSensorVelocity(0)
 
     def configure_pid(self):
         self.top_shooter_talon.config_kF(0, Constants.SHOOTER_VELOCITY_F, Constants.TIMEOUT_MS)
@@ -42,7 +48,7 @@ class Shooter(Subsystem):
 
         self.bottom_shooter_talon.set(0)
 
-    def set(self, control_mode: WPI_TalonSRX.ControlMode, spin_magnitude):
-        self.top_shooter_talon.set(control_mode, spin_magnitude)
+    def set(self, control_mode: WPI_TalonSRX.ControlMode, top_spin_magnitude, bottom_spin_magnitude):
+        self.top_shooter_talon.set(control_mode, top_spin_magnitude)
 
-        self.bottom_shooter_talon.set(control_mode, spin_magnitude)
+        self.bottom_shooter_talon.set(control_mode, bottom_spin_magnitude)
