@@ -1,4 +1,4 @@
-from wpilib.command import CommandGroup, WaitCommand
+from wpilib.command import CommandGroup, WaitCommand, Command
 
 from commands.move_timed import MoveTimed
 from commands.spin_timed import SpinTimed
@@ -28,20 +28,23 @@ class AutonomusDriving(CommandGroup):
             max_jerk=120.0,
         )
 
-        def autonomousPeriodic(self):
+        def execute(self):
             l = self.leftFollower.calculate(self.l_encoder.get())
             r = self.rightFollower.calculate(self.r_encoder.get())
+
+            drive_train = Command.getRobot().drivetrain
+            l, r = drive_train.get_position
 
             gyro_heading = (
                 -self.gyro.getAngle()
             )  # Assuming the gyro is giving a value in degrees
             desired_heading = pf.r2d(
-                self.leftFollower.getHeading()
+                self.drivetrain.get_position()
             )  # Should also be in degrees
 
             # This is a poor man's P controller
-            angleDifference = pf.boundHalfDegrees(desired_heading - gyro_heading)
-            turn = 5 * (-1.0 / 80.0) * angleDifference
+            angle_difference = pf.boundHalfDegrees(desired_heading - gyro_heading)
+            turn = 5 * (-1.0 / 80.0) * angle_difference
 
             l = l + turn
             r = r - turn

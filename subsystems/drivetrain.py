@@ -63,6 +63,12 @@ class DriveTrain(Subsystem):
         SmartDashboard.putNumber("left master voltage", self._left_master_talon.getMotorOutputVoltage())
         SmartDashboard.putNumber("right master voltage", self._right_master_talon.getMotorOutputVoltage())
 
+    def get_position(self):
+        left = self._left_master_talon.getSelectedSensorPosition()
+        right = self._right_master_talon.getSelectedSensorPosition()
+
+        return left, right
+
     # This is experimental code
     def interpreted_drive(self, x: float, y: float):
         left_pwm, right_pwm = self.driveInterpreter.DriveSignal(y, x, False, False)
