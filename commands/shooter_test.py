@@ -30,7 +30,7 @@ class ShooterTest(Command):
         SmartDashboard.putBoolean("Shooter On/Off", False)
 
     def execute(self):
-        Command.getRobot().shooter.set(ControlMode.PercentOutput, self.top_output, self.bottom_output)
+        Command.getRobot().shooter.set(self.top_output, self.bottom_output)
 
         SmartDashboard.putBoolean("Shooter On/Off", True)
         SmartDashboard.putNumber("Top Motor Current Speed", self.top_motor_current_speed)
