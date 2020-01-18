@@ -8,6 +8,7 @@ from constants import Constants
 from drive_interpreter import DriveHelper
 from wpilib.smartdashboard import SmartDashboard
 import math
+from ctre._impl import FeedbackDevice
 
 
 class DriveTrain(Subsystem):
@@ -27,6 +28,9 @@ class DriveTrain(Subsystem):
         # Left side is a mirror image, so invert the motor directions
         self._left_master_talon.setInverted(True)
         self._left_slave_talon.setInverted(True)
+
+        self._left_master_talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative)
+        self._right_master_talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative)
 
         # DifferentialDrive which conversts our joystick input to motor output, see diffdrive method
         self.drive = DifferentialDrive(self._left_master_talon, self._right_master_talon)
