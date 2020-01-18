@@ -11,3 +11,5 @@ class OI:
 
         self.button1 = JoystickButton(self.stick, 1)
         self.button1.whileHeld(ShooterTest())
+        self.button2 = JoystickButton(self.stick, 2)
+        self.button2.whenPressed(SpinTimed(100))
